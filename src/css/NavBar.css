@@ -1,0 +1,12 @@
+.navbar-custom {
+    width: vw;
+    background-color: violet; 
+    color: white;
+    padding: 10px;
+  }
+  
+  .navbar-custom .navbar-nav {
+    margin-left: auto;
+ 
+  }
+  
