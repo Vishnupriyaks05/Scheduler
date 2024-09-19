@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
-  const [schedule,setSchedule] = useState("");
+  const [schedule, setSchedule] = useState("");
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
@@ -20,18 +20,21 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     // Small delay to simulate async behavior (helps performance in real async tasks)
-    await new Promise((resolve) => setTimeout(resolve, 0)); 
-  
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
     // Retrieve users from localStorage (could be done outside the submit handler to reduce delay)
     const users = JSON.parse(localStorage.getItem("users")) || [];
-  
+
     // Check if user exists and password matches
     const user = users.find(
-      (user) => user.mobile === mobile && user.password === password && user.schedule === schedule
+      (user) =>
+        user.mobile === mobile &&
+        user.password === password &&
+        user.schedule === schedule
     );
-  
+
     if (user) {
       alert("Login successful!");
       navigate("/schedule-manager"); // Redirect to schedule manager page
@@ -67,10 +70,15 @@ const Login = () => {
             <Form style={{ width: "300px" }} onSubmit={handleLogin}>
               {/* Scheduler Dropdown */}
               <Form.Group controlId="formScheduler">
-                <Form.Control as="select" value={schedule}
+                <Form.Control
+                  as="select"
+                  value={schedule}
                   onChange={(e) => setSchedule(e.target.value)} // Fix: Update the state when selecting an option
-                  required>
-                  <option value="" disabled>Select Scheduler</option>
+                  required
+                >
+                  <option value="" disabled>
+                    Select Scheduler
+                  </option>
                   <option value="scheduler1">Scheduler 1</option>
                   <option value="scheduler2">Scheduler 2</option>
                 </Form.Control>

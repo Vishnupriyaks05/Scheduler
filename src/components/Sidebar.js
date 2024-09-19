@@ -4,9 +4,9 @@ import logo from "../images/kenndylog.png"; // Ensure the logo path is correct
 // import '../css/Sidebar.css'
 const Sidebar = () => {
   return (
-    <Container fluid>
+    <Container fluid style={{backgroundColor: "rgba(210, 211, 288, 0.3)"}} >
       <Row>
-        <Col md={3} className="sidebar vh-100 bg-light p-1">
+        <Col md={3} className="sidebar vh-100  p-1">
           {/* Logo */}
           <div className="text-center mb-4">
             <img src={logo} alt="Logo" className="img-fluid" />

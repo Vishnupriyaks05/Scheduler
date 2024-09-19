@@ -2,22 +2,36 @@ import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import NavBar from "./NavBar";
 import "../css/ScheduleManager.css";
-import { Button, Col, Dropdown, Form, Row } from "react-bootstrap";
+import { Button, Col, Dropdown, Row } from "react-bootstrap";
 import DatePicker from "react-datepicker"; // Import DatePicker component
 import "react-datepicker/dist/react-datepicker.css"; // Import DatePicker styles
-import { startOfMonth } from "date-fns"; // Helper functions from date-fns
+import {  startOfMonth, parseISO, isWithinInterval } from "date-fns"; // Helper functions from date-fns
+import data from "../json/data.json";
 
 const ScheduleManager = () => {
   // Set default dates: fromDate is the 1st of the current month, and toDate is the current date
   const [fromDate, setFromDate] = useState(startOfMonth(new Date()));
   const [toDate, setToDate] = useState(new Date());
 
-  // State for dropdowns
-  const [shiftSummary, setShiftSummary] = useState("");
-  const [shiftTiming, setShiftTiming] = useState("");
+  // Check if data is an array, if not default to an empty array
+  const shiftData = Array.isArray(data) ? data : [];
+
+  // Debug log to check if shiftData is being loaded correctly
+  console.log("shiftData:", shiftData);
+
+  // Function to filter shift data based on the selected date range
+  const filterShiftData = (shifts, from, to) => {
+    return shifts.filter((shift) => {
+      const shiftDate = parseISO(shift.date); // Convert date string to date object
+      return isWithinInterval(shiftDate, { start: from, end: to });
+    });
+  };
+
+  // Get filtered shift data within the selected date range
+  const filteredShiftData = filterShiftData(shiftData, fromDate, toDate);
 
   const handleGoClick = () => {
-    // Handle Go button click, e.g., filter schedules based on selected dates
+    // Handle Go button click filter schedules based on selected dates
     console.log("From:", fromDate, "To:", toDate);
   };
   return (
@@ -65,7 +79,7 @@ const ScheduleManager = () => {
               </div>
             </Col>
           </Row>
-
+          {/* ------------------------------------------------------------------------------------------- */}
           <Row
             style={{
               backgroundColor: "rgba(210, 211, 288, 0.3)",
@@ -107,47 +121,90 @@ const ScheduleManager = () => {
             </Col>
 
             <Col>
-      <Row>
-        
-        {/* Shift Summary Dropdown */}
-        <Col >
-          <Dropdown>
-            <Dropdown.Toggle
-              variant="outline-secondary"
-              id="dropdown-summary"
-              style={{ width: "50%" }} 
-            >
-              Shift Summary
-            </Dropdown.Toggle>
+              <Row>
+                {/* Shift Summary Dropdown */}
+                <Col>
+                  <Dropdown>
+                    <Dropdown.Toggle
+                      variant="outline-secondary"
+                      id="dropdown-summary"
+                      style={{ width: "50%" }}
+                    >
+                      Shift Summary
+                    </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Shift 1</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Shift 3</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Col>
+                    <Dropdown.Menu>
+                      <Dropdown.Item>Shift 1</Dropdown.Item>
+                      <Dropdown.Item>Shift 2</Dropdown.Item>
+                      <Dropdown.Item>Shift 3</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Col>
 
-        {/* Shift Timing Dropdown */}
-        <Col>
-          <Dropdown>
-            <label>Sort By:</label>
-            <Dropdown.Toggle
-              variant="outline-secondary"
-              id="dropdown-timing"
-              style={{ width: "50%" }} 
-            >
-              Shift Timing
-            </Dropdown.Toggle>
+                {/* Shift Timing Dropdown */}
+                <Col>
+                  <Dropdown>
+                    <label>Sort By:</label>
+                    <Dropdown.Toggle
+                      variant="outline-secondary"
+                      id="dropdown-timing"
+                      style={{ width: "50%" }}
+                    >
+                      Shift Timing
+                    </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Day Shift</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Night Shift</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Col>
-      </Row>
-    </Col>
+                    <Dropdown.Menu>
+                      <Dropdown.Item>Day Shift</Dropdown.Item>
+                      <Dropdown.Item>Evning Shift</Dropdown.Item>
+                      <Dropdown.Item>Night Shift</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Col>
+              </Row>
+            </Col>
           </Row>
+          {/* --------------------------------------------------------------------------------------------- */}
+          {/* Display shift data as cards */}
+          <Row style={{ marginTop: "15px" }}>
+            {/* Map over the shiftData array */}
+            {filteredShiftData.length > 0 ? (
+              filteredShiftData.map((shift, index) => (
+                <Col md={6} key={index}>
+                  <div className="card mb-3">
+                    <div
+                      className="card-header"
+                      style={{ backgroundColor: "rgba(210, 211, 288, 0.3)" }}
+                    >
+                      {shift.date} - {shift.shiftTiming}
+                    </div>
+                    <div className="card-body">
+                      <p>CA Slots: {shift.caSlots}</p>
+                      <p>Light Duty Slots: {shift.lightDutySlots}</p>
+                    </div>
+                    <div
+                      className="card-footer"
+                      style={{ backgroundColor: "rgba(210, 211, 288, 0.3)" }}
+                    >
+                      <span>{shift.status}</span>
+                      <Button
+                        variant="light"
+                        style={{ float: "right", color: "rgb(106, 9, 200)" }}
+                      >
+                        Details
+                      </Button>
+                    </div>
+                  </div>
+                </Col>
+              ))
+            ) : (
+              <Col>
+                <div className="no-data">
+                  <h5>No data found for the selected date range</h5>
+                </div>
+              </Col>
+            )}
+          </Row>
+          {/* --------------------------------------------------------------------------------------------- */}
         </div>
       </div>
     </div>

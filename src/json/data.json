@@ -1,0 +1,98 @@
+[
+    {
+        "shift": "Day Shift",
+        "date": "2024-08-20", 
+        "shiftTiming": "7am - 3.30pm",
+        "caSlots": 13,
+        "lightDutySlots": 5,
+        "status": "Published"
+      },
+      {
+        "shift": "Night Shift",
+        "date": "2024-08-21",
+        "shiftTiming": "11pm - 7am",
+        "caSlots": 8,
+        "lightDutySlots": 7,
+        "status": "Draft"
+      },
+      {
+        "shift": "Evning Mid Shift",
+        "date": "2024-08-20", 
+        "shiftTiming": "3.30pm - 11pm",
+        "caSlots": 8,
+        "lightDutySlots": 7,
+        "status": "Published"
+      },
+      {
+        "shift": "Day Shift",
+        "date": "2024-09-02", 
+        "shiftTiming": "7am - 3.30pm",
+        "caSlots": 10,
+        "lightDutySlots": 5,
+        "status": "Published"
+      },
+      {
+        "shift": "Night Shift",
+        "date": "2024-09-03",
+        "shiftTiming": "11pm - 7am",
+        "caSlots": 8,
+        "lightDutySlots": 4,
+        "status": "Draft"
+      },
+      {
+        "shift": "Evning Mid Shift",
+        "date": "2024-09-04", 
+        "shiftTiming": "3.30pm - 11pm",
+        "caSlots": 5,
+        "lightDutySlots": 7,
+        "status": "Published"
+      },
+      {
+        "shift": "Day Shift",
+        "date": "2024-09-05", 
+        "shiftTiming": "7am - 3.30pm",
+        "caSlots": 10,
+        "lightDutySlots": 5,
+        "status": "Published"
+      },
+      {
+        "shift": "Night Shift",
+        "date": "2024-09-06",
+        "shiftTiming": "11pm - 7am",
+        "caSlots": 8,
+        "lightDutySlots": 4,
+        "status": "Draft"
+      },
+      {
+        "shift": "Evning Mid Shift",
+        "date": "2024-09-07", 
+        "shiftTiming": "3.30pm - 11pm",
+        "caSlots": 5,
+        "lightDutySlots": 7,
+        "status": "Published"
+      },
+      {
+        "shift": "Day Shift",
+        "date": "2024-09-08", 
+        "shiftTiming": "7am - 3.30pm",
+        "caSlots": 10,
+        "lightDutySlots": 5,
+        "status": "Published"
+      },
+      {
+        "shift": "Night Shift",
+        "date": "2024-09-17",
+        "shiftTiming": "11pm - 7am",
+        "caSlots": 8,
+        "lightDutySlots": 4,
+        "status": "Draft"
+      },
+      {
+        "shift": "Evning Mid Shift",
+        "date": "2024-09-20", 
+        "shiftTiming": "3.30pm - 11pm",
+        "caSlots": 5,
+        "lightDutySlots": 7,
+        "status": "Published"
+      }
+]
